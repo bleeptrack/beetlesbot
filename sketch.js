@@ -186,6 +186,9 @@ class Beetle{
       this.canvas.pop();
       this.canvas.noTint();
 
+      // finally remove the canvas
+      this.wingPattern.canvas.parentElement.removeChild(this.wingPattern.canvas);
+
       //center bug
       /*var antennamin = this.antennaL1.y;
       if(this.secondPart>=1){
@@ -691,7 +694,12 @@ class Beetle{
     	flipped.mask(mask);
     	this.canvas.image(flipped,0,0);
 
-
+      wingMaskL.canvas.parentElement.removeChild(wingMaskL.canvas);
+      wingMaskL = null;
+      wingMaskR.canvas.parentElement.removeChild(wingMaskR.canvas);
+      wingMaskR = null;
+      patternFlip.canvas.parentElement.removeChild(patternFlip.canvas);
+      patternFlip = null;
 
     	this.canvas.noTint();
     	this.canvas.noFill();
