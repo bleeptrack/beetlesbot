@@ -135,7 +135,7 @@ function colStep(col, max){
 	col[2] = col[2] + rnd(0,2*max)-max;
 }
 
-function shuffle(array) {
+function shuffleArray(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
@@ -160,10 +160,10 @@ function calcGradient(c11, c12, c13, c21, c22, c23, nbr){
 	s3 = (c23-c13)/nbr;
 	var colors = Array();
 	for(var i = 0; i<=nbr; i++){
-		console.log(c11 + s1*i, c12 + s2*i, c13 + s3*i);
+		// console.log(c11 + s1*i, c12 + s2*i, c13 + s3*i);
 		colors[i] = color(c11 + s1*i, c12 + s2*i, c13 + s3*i);
 	}
-	//return shuffle(colors);
+	//return shuffleArray(colors);
 	return colors;
 }
 
@@ -247,14 +247,14 @@ class Beetle{
 
 			var b1 = rnd(0,100);
 			var b2 = rnd(0,100);
-      console.log("b1: "+b1);
-      console.log("b2: "+b2);
+      // console.log("b1: "+b1);
+      // console.log("b2: "+b2);
 
     	this.colors.push(this.getColorName(mainr, s1, b1));
 
 			var colo = calcGradient(mainr, s1, b1, wingr, s1, b2, gradStep);
 			//var colo = calcGradient(mainr, 100,weightedRnd() , wingr, 100, 100, 6);
-			console.log(colo);
+			// console.log(colo);
 
 
     	this.mainC = colo[1];
