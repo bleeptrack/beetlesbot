@@ -10,23 +10,27 @@ function setup() {
 
 	seed(parseInt(initseed));
 
-	createCanvas(500,500);
-  background(255);
 	noLoop();
-	scale(0.7);
-  	var b = new Beetle();
 
+  var b = new Beetle();
 
+  // add background
+  document.getElementById('beetle').style.backgroundImage = 'url(' + b.bgcanvas.canvas.toDataURL() + ')';
+  b.bgcanvas.canvas.parentElement.removeChild(b.bgcanvas.canvas);
 
-      image(b.getImage(),0,0,700,700);
+  // extract and trim beetle
+  var cropped = trimCanvas(b.canvas.canvas);
+  b.canvas.canvas.parentElement.removeChild(b.canvas.canvas);
 
+  document.getElementById('beetle').appendChild(cropped);
+  cropped.id = 'beetlecanvas';
+  cropped.style.display = 'block';
 
-  	var div = document.getElementById('name');
+	var div = document.getElementById('name');
 	div.innerHTML = b.name;
 
 	var div = document.getElementById('seed');
-	div.innerHTML = '<a href="http://beetles.bleeptrack.de?seed='+initseed+'">seed: '+initseed+'</a>';
-
+	div.innerHTML = '<a href="http://beetles.bleeptrack.de?seed='+initseed+'">#'+initseed+'</a>';
 }
 
 function draw() {
@@ -41,7 +45,7 @@ var maskrand = 0xffffffff;
 
 // Takes any integer
 function seed(i) {
-    m_w = 987654321 + i;
+  m_w = 987654321 + i;
 	m_z = 123456789 - i;
 }
 
@@ -115,20 +119,20 @@ function calcGradient(c11, c12, c13, c21, c22, c23, nbr){
 class Beetle{
 
   	constructor(){
-    	this.canvas = createGraphics(1000,1000);
+    	this.canvas = createGraphics(1500,1500);
+      this.bgcanvas = createGraphics(750,500);
+
+      //this.canvas.scale(2,2);
+      this.canvas.scale(3,3);
 
     	this.init();
     	this.draw();
     	this.generateName();
-	}
+    }
 
 
     getImage(){
     	return this.canvas;
-  	}
-
-  	saveImage(name){
-    	canvas.save(name+".png");
   	}
 
   	draw(){
@@ -138,12 +142,12 @@ class Beetle{
       //background
       this.drawPattern();
       var pattern = this.wingPattern.get();
-      this.canvas.tint(255,50);
-      this.canvas.push();
-      this.canvas.scale(2);
-      this.canvas.image(pattern,0,0);
-      this.canvas.pop();
-      this.canvas.noTint();
+      this.bgcanvas.tint(255,50);
+      this.bgcanvas.push();
+      this.bgcanvas.scale(2);
+      this.bgcanvas.image(pattern,0,0);
+      this.bgcanvas.pop();
+      this.bgcanvas.noTint();
 
       // finally remove the canvas
       this.wingPattern.canvas.parentElement.removeChild(this.wingPattern.canvas);
