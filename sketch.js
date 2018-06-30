@@ -30,7 +30,7 @@ function setup() {
 	div.innerHTML = b.name;
 
 	var div = document.getElementById('seed');
-	div.innerHTML = '<a href="http://beetles.bleeptrack.de?seed='+initseed+'">#'+initseed+'</a>';
+	div.innerHTML = '<a href="https://beetles.bleeptrack.de?seed='+initseed+'">#'+initseed+'</a>';
 }
 
 function draw() {
