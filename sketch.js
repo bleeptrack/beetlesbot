@@ -15,16 +15,10 @@ function setup() {
 	noLoop();
 	scale(0.7);
   	var b = new Beetle();
-  	//b.saveImage("bug");
 
 
-  if('save' in params){
-        image(b.getImage(),0,0,1400,1400);
-        //getAjax('saveImg.php?test',function(e){console.log("yayGET");});
 
-  }else{
       image(b.getImage(),0,0,700,700);
-  }
 
 
   	var div = document.getElementById('name');
@@ -33,44 +27,9 @@ function setup() {
 	var div = document.getElementById('seed');
 	div.innerHTML = '<a href="http://beetles.bleeptrack.de?seed='+initseed+'">seed: '+initseed+'</a>';
 
-  var dataURL = canvas.toDataURL();
-
-	if('save' in params){
-        postAjax('saveImg.php', { data: dataURL, name: b.name, seed: initseed }, function(data){ });
-        //getAjax('saveImg.php?test',function(e){console.log("yayGET");});
-
-  }
 }
 
-function postAjax(url, data, success) {
-    var ps = typeof data == 'string' ? data : Object.keys(data).map(
-            function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
-        ).join('&');
-    console.log(ps)
-
-    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-    xhr.open('POST', url);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
-    };
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send(ps);
-    return xhr;
-}
-
-function getAjax(url, success) {
-    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    xhr.open('GET', url);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState>3 && xhr.status==200) success(xhr.responseText);
-    };
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.send();
-    return xhr;
-}
-
-function draw(){
+function draw() {
 
 }
 
