@@ -1,15 +1,14 @@
-function setup(){
+function setup() {
 
-	var tmparr = window.location.search.substr(1).split("=");
-	var params = {};
-    params[tmparr[0]] = tmparr[1];
-    var initseed = Math.floor(Math.random()*9999999999);
+	var params = getURLParams();
 
-    if('seed' in params){
-      	initseed = params['seed'];
-  	}
+  var initseed = Math.floor(Math.random()*9999999999);
 
-  	seed(parseInt(initseed));
+  if ('seed' in params){
+    	initseed = params['seed'];
+	}
+
+	seed(parseInt(initseed));
 
 	createCanvas(500,500);
   background(255);
@@ -74,22 +73,6 @@ function getAjax(url, success) {
 function draw(){
 
 }
-
-
-function findGetParameter(parameterName) {
-    var result = null,
-        tmp = [];
-    location.search
-        .substr(1)
-        .split("&")
-        .forEach(function (item) {
-          tmp = item.split("=");
-          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-        });
-    return result;
-}
-
-
 
 ////handle seeds
 var m_w = 123456789;
