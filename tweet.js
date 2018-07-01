@@ -70,7 +70,7 @@ var T = new Twit({
   let b64image = await screenshotDOMElement({ selector: '#beetle' });
 
   // FIXME: add random word
-  let tweetText = `${name}    seed:${seed} https://beetles.bleeptrack.de?seed=${seed}`;
+  let tweetText = `${name}    seed:${seed} ${BEETLESURL}?seed=${seed}`;
   console.log(tweetText);
 
   // chrom*ium is not needed anymore
