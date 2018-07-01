@@ -3,22 +3,26 @@ const Twit = require('twit');
 const fs = require('fs');
 
 const BEETLESURL = 'https://beetles.bleeptrack.de';
-const ENABLE_TWEET = true;
+const ENABLE_TWEET = process.env.ENABLE_TWEET || false;
 
 var T;
 if (ENABLE_TWEET) {
   T = new Twit({
-    consumer_key:         '',
-    consumer_secret:      '',
-    access_token:         '',
-    access_token_secret:  '',
+    consumer_key:         process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret:      process.env.TWITTER_CONSUMER_SECRET,
+    access_token:         process.env.TWITTER_ACCESS_TOKEN,
+    access_token_secret:  process.env.TWITTER_ACCESS_TOKEN_SECRET,
     timeout_ms:           30*1000,  // optional HTTP request timeout to apply to all requests.
     strictSSL:            true,     // optional - requires SSL certificates to be valid.
   });
 }
 
 (async () => {
-  const browser = await puppeteer.launch();
+  let browseropts = {};
+  if (!!process.env.CHROME_ARGS) {
+    browseropts['args'] = process.env.CHROME_ARGS.split(' ');
+  }
+  const browser = await puppeteer.launch(browseropts);
   const page = await browser.newPage();
   // Adjustments particular to this page to ensure we hit desktop breakpoint.
   page.setViewport({ width: 1000, height: 800, deviceScaleFactor: 2 });
