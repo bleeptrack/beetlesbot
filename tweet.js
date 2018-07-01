@@ -28,6 +28,7 @@ if (ENABLE_TWEET) {
   // from: https://gist.github.com/malyw/b4e8284e42fdaeceab9a67a9b0263743
   async function screenshotDOMElement(opts = {}) {
     const path = 'path' in opts ? opts.path : null;
+    const encoding = 'encoding' in opts ? opts.encoding : 'base64';
     const selector = opts.selector;
 
     if (!selector) {
@@ -55,7 +56,7 @@ if (ENABLE_TWEET) {
         width: rect.width,
         height: rect.height
       },
-      encoding: 'base64'
+      encoding: encoding
     });
   }
 
@@ -75,7 +76,7 @@ if (ENABLE_TWEET) {
   seed = seed.replace(/^#/, '');
 
   console.debug(`getting image`);
-  let b64image = await screenshotDOMElement({ selector: '#beetle' });
+  let imagedata = await screenshotDOMElement({ selector: '#beetle', encoding: (ENABLE_TWEET ? 'base64' : 'binary') });
 
   console.debug(`building full name`);
   const nouns = JSON.parse(fs.readFileSync('nouns.json', 'utf8'));
@@ -93,12 +94,14 @@ if (ENABLE_TWEET) {
   await browser.close();
 
   if (!ENABLE_TWEET) {
+    console.debug(`writing image to beetle.png`);
+    fs.writeFileSync('beetle.png', imagedata);
     return;
   }
 
   // upload the media to Twitter
   console.debug(`uploading image to twitter`);
-  let media = await T.post('media/upload', { media_data: b64image });
+  let media = await T.post('media/upload', { media_data: imagedata });
   let mediaIdStr = media.data.media_id_string;
 
   // add the metadata
