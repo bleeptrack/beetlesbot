@@ -1,3 +1,4 @@
+const path = require('path');
 const puppeteer = require('puppeteer');
 const Twit = require('twit');
 const fs = require('fs');
@@ -31,7 +32,7 @@ if (ENABLE_TWEET) {
 
   // from: https://gist.github.com/malyw/b4e8284e42fdaeceab9a67a9b0263743
   async function screenshotDOMElement(opts = {}) {
-    const path = 'path' in opts ? opts.path : null;
+    const spath = 'path' in opts ? opts.path : null;
     const encoding = 'encoding' in opts ? opts.encoding : 'base64';
     const selector = opts.selector;
 
@@ -53,7 +54,7 @@ if (ENABLE_TWEET) {
     }
 
     return await page.screenshot({
-      path,
+      spath,
       clip: {
         x: rect.left,
         y: rect.top,
