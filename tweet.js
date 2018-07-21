@@ -83,7 +83,7 @@ if (ENABLE_TWEET) {
   let imagedata = await screenshotDOMElement({ selector: '#beetle', encoding: (ENABLE_TWEET ? 'base64' : 'binary') });
 
   console.debug(`building full name`);
-  const nouns = JSON.parse(fs.readFileSync('nouns.json', 'utf8'));
+  const nouns = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'nouns.json'), 'utf8'));
   let word = nouns[Math.floor(Math.random()*nouns.length)];
 
   let type = 'bug';
