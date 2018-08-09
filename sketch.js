@@ -119,7 +119,7 @@ function calcGradient(c11, c12, c13, c21, c22, c23, nbr){
 class Beetle{
 
   	constructor(){
-    	this.canvas = createGraphics(1500,1500);
+      this.canvas = createGraphics(1500,1500);
       this.bgcanvas = createGraphics(750,500);
 
       //this.canvas.scale(2,2);
@@ -218,11 +218,9 @@ class Beetle{
 
       var cname1 = this.getColorName(mainr, s1, b1);
       var cname2 = this.getColorName(wingr, s2, b2);
-      if(cname1 != cname2){
-    	 this.colors.push(cname1+"-"+cname2+"-winged");
-      }else{
-        this.colors.push(cname1+"-winged");
-      }
+      this.colors.push(cname1);
+      this.colors.push(cname2);
+      
 
 
     	this.wingsC2 = colo[gradStep];
@@ -259,20 +257,20 @@ class Beetle{
     	this.wingHandleM = rnd(10,neckoffX);
 
 	    if(this.wingL.y - this.bottom.y > 70){
-	      this.attributes.push("long-winged");
+	      this.attributes.push("Long-Winged");
 	    }
 	    if(this.bottom.y - this.wingL.y > 30){
-	      this.attributes.push("short-winged");
+	      this.attributes.push("Short-Winged");
 	    }
 	    if(this.bottom.y > 400){
-	      this.attributes.push("large");
+	      this.attributes.push("Large");
 	    }
 	    if(this.bottom.y < 300 && this.neckoffX > 30 && this.wingL.y < 300){
-	      this.attributes.push("plump");
-	      this.attributes.push("small");
+	      this.attributes.push("Plump");
+	      this.attributes.push("Small");
 	    }
 	    if(this.neckoffX<15 && this.bottomHandle<60){
-	      this.attributes.push("narrow");
+	      this.attributes.push("Narrow");
 	    }
 
 
@@ -311,7 +309,7 @@ class Beetle{
 
 	    this.nbrFeet = rnd(2,6);
 	    if(this.nbrFeet>4){
-	      this.attributes.push("long-legged");
+	      this.attributes.push("Long-Legged");
 	    }
 
   	}
@@ -319,31 +317,46 @@ class Beetle{
 
 
   	getColorName(c, s, b){
-
-			if(b < 35)
-				return "black";
-			else if(b >=90)
-					return "white";
-			else if(s<20)
-					return "grey";
-			else if(c < 20)
-	      	return "red";
-	    else if(c < 42)
-	      return "orange";
-	    else if(c < 74)
-	      return "yellow";
-	    else if(c < 155)
-	      return "green";
-	    else if(c < 175)
-	      return "turquoise";
-	    else if(c < 262)
-	      return "blue";
-	    else if(c < 286)
-	      return "violet";
-	    else if(c < 334)
-	      return "pink";
-	    return "red";
+        var rgb = this.hslToRgb(c/360,s/100,b/100);
+        var r = this.toHex(rgb[0]);
+        var g = this.toHex(rgb[1]);
+        var b = this.toHex(rgb[2]);
+        var n_match  = ntc.name("#"+r+g+b);
+        return n_match[1];
   	}
+  	
+    toHex(rgb) { 
+        var hex = Number(rgb).toString(16);
+        if (hex.length < 2) {
+            hex = "0" + hex;
+        }
+        return hex;
+    };
+  	
+    hslToRgb(h, s, l){
+        var r, g, b;
+
+        if(s == 0){
+            r = g = b = l; // achromatic
+        }else{
+            var hue2rgb = function hue2rgb(p, q, t){
+                if(t < 0) t += 1;
+                if(t > 1) t -= 1;
+                if(t < 1/6) return p + (q - p) * 6 * t;
+                if(t < 1/2) return q;
+                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            }
+
+            var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            var p = 2 * l - q;
+            r = hue2rgb(p, q, h + 1/3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1/3);
+        }
+
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    }
 
   	drawHead(){
     	this.canvas.ellipse(this.head.x,this.head.y,this.headV,this.headH);
@@ -419,7 +432,7 @@ class Beetle{
 	            		a = atan2(ty, tx);
 	            		a -= HALF_PI;
 	            		this.canvas.line(x, y, -cos(a)*len + x, -sin(a)*len + y);
-	            		this.attributes.push("bristle feelered");
+	            		this.attributes.push("Bristle-Feelered");
 	          		}
 	         	 	break;
 	      	}
@@ -573,7 +586,7 @@ class Beetle{
         		this.wingsC1 = this.wingsC2;
         		this.wingsC2 = tmp;
       		}
-      		this.attributes.push("ringed");
+      		this.attributes.push("Ringed");
     	}else if(choose<2){
       		this.wingPattern.fill(this.wingsC2);
       		var r = rnd(5,40);
@@ -581,7 +594,7 @@ class Beetle{
       		for(var i = 0; i<nbr; i++){
         		this.wingPattern.ellipse(rnd(0,1000),rnd(0,1000),r,r);
       		}
-      		this.attributes.push("dotted");
+      		this.attributes.push("Dotted");
     	}else{
       		this.wingPattern.push();
       		this.wingPattern.translate(0,-500);
@@ -604,7 +617,7 @@ class Beetle{
       		}
 
       		this.wingPattern.pop();
-      		this.attributes.push("striped");
+      		this.attributes.push("Striped");
     	}
   	}
 
@@ -683,9 +696,9 @@ class Beetle{
 
   	generateName(){
 
-    	this.name = this.colors[rnd(0,this.colors.length)];
+    	this.name = this.attributes[rnd(0,this.attributes.length)];
     	if(this.attributes.length>0){
-      		this.name += " "+this.attributes[rnd(0,this.attributes.length)];
+      		this.name += ", "+this.colors[rnd(0,this.colors.length)]+"-Colored";
     	}
 
   	}
