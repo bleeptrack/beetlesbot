@@ -2,11 +2,13 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 const Twit = require('twit');
 const fs = require('fs');
+const Masto = require('mastodon')
 
 const BEETLESURL = 'https://beetles.bleeptrack.de';
 const ENABLE_TWEET = process.env.ENABLE_TWEET || false;
 
 var T;
+var M;
 if (ENABLE_TWEET) {
   T = new Twit({
     consumer_key:         process.env.TWITTER_CONSUMER_KEY,
@@ -15,6 +17,11 @@ if (ENABLE_TWEET) {
     access_token_secret:  process.env.TWITTER_ACCESS_TOKEN_SECRET,
     timeout_ms:           30*1000,  // optional HTTP request timeout to apply to all requests.
     strictSSL:            true,     // optional - requires SSL certificates to be valid.
+  });
+  
+  M = new Masto({
+    access_token: process.env.MASTODON_ACCESS_TOKEN,
+    api_url:'https://botsin.space/api/v1/'
   });
 }
 
@@ -103,7 +110,7 @@ if (ENABLE_TWEET) {
     fs.writeFileSync('beetle.png', imagedata);
     return;
   }
-
+  
   // upload the media to Twitter
   console.debug(`uploading image to twitter`);
   let media = await T.post('media/upload', { media_data: imagedata });
@@ -118,4 +125,12 @@ if (ENABLE_TWEET) {
   console.debug(`tweeting`);
   let params = { status: tweetText, media_ids: [mediaIdStr] };
   await T.post('statuses/update', params);
+  
+  //post to mastodon
+    var id;
+    fs.writeFileSync(path.resolve(__dirname, 'beetle.png'), imagedata);
+    M.post('media', { file: fs.createReadStream(path.resolve(__dirname, 'beetle.png')) }).then(resp => {
+        id = resp.data.id;
+        M.post('statuses', { status: tweetText, media_ids: [id] })
+    })
 })();
