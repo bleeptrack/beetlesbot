@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link rel="stylesheet" type="text/css" href="normalize.css"/>
+  <link rel="stylesheet" type="text/css" href="beetle.css"/>
+  <script src="color.js"></script>
+  <script src="p5.js"></script>
+  <script src="lib.js"></script>
+  <script src="sketch.js"></script>
+  <script type="text/javascript" src="//spreadshirt.github.io/apps/spreadshirt.min.js"></script>
+</head>
+<body>
+  <main>
+    <div class="meta">
+      <div id="name">&nbsp;</div>
+      <div id="refresh"><a href="https://beetles.bleeptrack.de">NEW</a></div>
+      <div id="seed">&nbsp;</div>
+    </div>
+    <div id="beetle"></div>
+  </main>
+  <div id="wrap">
+  
+        <div class="cont">
+        <button class="parambutton">Colors</button><fieldset id="colors" style="display:none"></fieldset>
+        </div>
+        
+        <div class="cont">
+        <button class="parambutton">Body Shape</button><fieldset id="body" style="display:none"></fieldset>
+        </div>
+        
+        <div class="cont">
+        <button class="parambutton">Feelers</button><fieldset id="feelers" style="display:none"></fieldset>
+        </div>
+        
+        <div class="cont">
+        <button class="parambutton">Feet</button><fieldset id="feet" style="display:none"></fieldset>
+        </div>
+        
+        <div class="cont">
+        <button class="parambutton">Wing Shape</button><fieldset id="wing" style="display:none"></fieldset>
+        </div>
+        
+        <div class="cont">
+        <button class="parambutton">Pattern</button><fieldset id="pattern" style="display:none"></fieldset>
+        </div>
+        
+        <div class="cont"><button id="shirtbutton" onclick="chooseDesign()">print on shirt (soon :) )</button></div>
+        
+        <div class="cont"><button id="cyclebutton" onclick="toggleLoop()">Cycle Bug</button></div>
+   
+    
+  </div>
+  <footer>
+    a project by <a href="https://bleeptrack.de">bleeptrack</a>
+    &middot;
+    <a href="https://twitter.com/beetlesbot">follow @beetlesbot</a>
+  </footer>
+  
+
+
+</body>
+</html>

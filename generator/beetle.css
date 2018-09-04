@@ -1,0 +1,159 @@
+html, body {
+  margin: 0;
+}
+
+html {
+  /*background: #fff url('wallpaper.jpg');*/
+  background-size: cover;
+  color: #333;
+  font: 16px/1.4 Open Sans, Helvetica, Arial, sans-serif;
+}
+
+body {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 40px 0 0 0;
+}
+
+main {
+  margin: 0 0 1em;
+  background: #fff;
+  text-align: center;
+  box-shadow: 2px 4px 6px 1px rgba(50, 50, 50, 0.14);
+}
+
+.meta {
+  display: flex;
+  flex-direction: row;
+  padding: 2em 2em 1.7em;
+}
+
+#name {
+  flex: 1 1 0;
+  text-align: left;
+  font-size: 1.4em;
+  color: #444;
+  font-family: serif;
+  line-height: 1;
+}
+
+#refresh a {
+  color: #666;
+  text-decoration: none;
+  font-weight: 200;
+  margin-right: 30px;
+}
+
+#seed a {
+  color: #666;
+  text-decoration: none;
+  font-weight: 200;
+}
+
+#beetle {
+  min-height: 500px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center bottom;
+}
+
+#beetlecanvas {
+  max-width: 90%;
+  max-height: 400px;
+}
+
+#defaultCanvas0 {
+  display: none;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  margin: 0 0 1em;
+  color: #666;
+  text-shadow: 0 0 2px #fff;
+}
+
+footer a {
+  color: #444;
+}
+
+fieldset{
+    background-color: white;
+    width: 100%;
+    display:none;
+    margin-bottom:15px;
+}
+    
+#wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.cont{
+    width: 26%;
+}
+    
+button{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#shirt-container{
+    
+    
+    
+}
+
+.container1{
+    width:1500px;
+    height: 700px;
+}
+
+.container2{
+    width:1500px;
+    height: 1500px;
+    position: relative;
+    left: -400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.singlebeetle{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: space-around;
+    background-size: contain;
+}
+
+.rasterimg{
+    margin: auto 0;
+}
+
+#shirt-background{
+    height: 400px;
+    background-position: center; 
+    position: relative;
+    top: 150px;
+    background-color: white;
+}
+
+#shirt-canvas{
+    
+    height: 700px;
+    position: relative;
+    top: -400px;
+    margin: 0 auto;
+    
+
+}
+
+.shirt-body{
+    max-width: 100% !important;
+}
