@@ -1372,6 +1372,7 @@ var ntc = {
 ["EEFF9A", "Jonquil"],
 ["EEFFE2", "Rice Flower"],
 ["EF863F", "Jaffa"],
+["EF9692", "Dusky Pink"],
 ["EFEFEF", "Gallery"],
 ["EFF2F3", "Porcelain"],
 ["F091A9", "Mauvelous"],
@@ -1689,4 +1690,4 @@ var ntc = {
 }
 
 ntc.init();
- 
+
