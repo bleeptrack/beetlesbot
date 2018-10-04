@@ -847,6 +847,7 @@ var ntc = {
 ["991199", "Violet Eggplant"],
 ["991613", "Tamarillo"],
 ["991B07", "Totem Pole"],
+["996516", "Golden Brown"],
 ["996666", "Copper Rose"],
 ["9966CC", "Amethyst"],
 ["997A8D", "Mountbatten Pink"],
