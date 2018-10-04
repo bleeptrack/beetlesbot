@@ -1,5 +1,7 @@
 # beetlesbot
-beetlesbot and shirtgenerator from beetles.bleeptrack.de
+beetlesbot and shirtgenerator from [beetles.bleeptrack.de](https://beetles.bleeptrack.de).
+
+beetlesbot also posts to [Twitter](https://twitter.com/beetlesbot) and [Mastodon](https://botsin.space/@beetlesbot).
 
 ![screenshot](/img/screenshot.png)
 
