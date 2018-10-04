@@ -147,6 +147,7 @@ var ntc = {
 ["009DC4", "Pacific Blue"],
 ["00A693", "Persian Green"],
 ["00A86B", "Jade"],
+["00C9F0", "Beautiful Sky Blue"],
 ["00CC99", "Caribbean Green"],
 ["00CCCC", "Robin's Egg Blue"],
 ["00FF00", "Green"],
