@@ -1121,6 +1121,7 @@ var ntc = {
 ["CBD3B0", "Green Mist"],
 ["CBDBD6", "Nebula"],
 ["CC3333", "Persian Red"],
+["CC6666", "Fuzzy Wuzzy"],
 ["CC5500", "Burnt Orange"],
 ["CC7722", "Ochre"],
 ["CC8899", "Puce"],
