@@ -180,7 +180,7 @@ var ntc = {
 ["041004", "Midnight Moss"],
 ["041322", "Black Pearl"],
 ["042E4C", "Blue Whale"],
-["044022", "Zuccini"],
+["044022", "Zucchini"],
 ["044259", "Teal Blue"],
 ["051040", "Deep Cove"],
 ["051657", "Gulf Blue"],
