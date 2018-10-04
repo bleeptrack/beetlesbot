@@ -124,9 +124,27 @@ button{
     justify-content: space-around;
 }
 
+.container0{
+    width:500px;
+    height: 500px;
+    position: relative;
+    left: -400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
 .singlebeetle{
     width: 300px;
     height: 300px;
+    display: flex;
+    justify-content: space-around;
+    background-size: contain;
+}
+
+.singlebeetle0{
+    width: 500px;
+    height: 500px;
     display: flex;
     justify-content: space-around;
     background-size: contain;

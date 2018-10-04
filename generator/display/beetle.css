@@ -1,0 +1,50 @@
+@font-face {
+    font-family: Bleeptrack;
+    src: url(Bleepfont2.woff);
+}
+
+body, html{
+    width: 100%;
+    height: 100%;
+    
+}
+
+#beetle{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-size:cover;
+}
+
+
+#beetleimg{
+    height: 80%;
+    width: 40%
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#beetlecanvas{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#text{
+    height: 80%;
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+p{
+    font-family: Bleeptrack;
+    font-weight: bold;
+    font-size: 600%;
+    text-outline: 3px 3px #000;
+    
+}
