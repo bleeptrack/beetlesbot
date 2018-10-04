@@ -1268,6 +1268,7 @@ var ntc = {
 ["E48400", "Fulvous"],
 ["E49B0F", "Gamboge"],
 ["E4C2D5", "Melanie"],
+["E4CEAC", "Burly Wood"],
 ["E4CFDE", "Twilight"],
 ["E4D1C0", "Bone"],
 ["E4D422", "Sunflower"],
