@@ -1034,6 +1034,7 @@ var ntc = {
 ["BA7F03", "Pirate Gold"],
 ["BAB1A2", "Nomad"],
 ["BAC7C9", "Submarine"],
+["BADA55", "Tough Lime"],
 ["BAEEF9", "Charlotte"],
 ["BB3385", "Medium Red Violet"],
 ["BB8983", "Brandy Rose"],
