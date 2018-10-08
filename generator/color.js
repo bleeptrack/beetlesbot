@@ -1480,6 +1480,7 @@ var ntc = {
 ["F8F7DC", "Coconut Cream"],
 ["F8F7FC", "White Lilac"],
 ["F8F8F7", "Desert Storm"],
+["F8F8FF", "Ghost White"],
 ["F8F99C", "Texas"],
 ["F8FACD", "Corn Field"],
 ["F8FDD3", "Mimosa"],
