@@ -308,6 +308,7 @@ var ntc = {
 ["26283B", "Ebony Clay"],
 ["273A81", "Bay of Many"],
 ["27504B", "Plantation"],
+["2772DB", "Colbalt Blue"]
 ["278A5B", "Eucalyptus"],
 ["281E15", "Oil"],
 ["283A77", "Astronaut"],
