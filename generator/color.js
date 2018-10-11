@@ -144,6 +144,7 @@ var ntc = {
 ["007EC7", "Lochmara"],
 ["007FFF", "Azure Radiance"],
 ["008080", "Teal"],
+["008DC9", "Bavaria"],
 ["0095B6", "Bondi Blue"],
 ["009DC4", "Pacific Blue"],
 ["00A693", "Persian Green"],
