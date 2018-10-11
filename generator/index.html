@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="viewport" content="width=device-width"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" type="text/css" href="normalize.css"/>
   <link rel="stylesheet" type="text/css" href="beetle.css"/>
   <script src="color.js"></script>
@@ -13,11 +13,17 @@
   <script type="text/javascript" src="//spreadshirt.github.io/apps/spreadshirt.min.js"></script>
 </head>
 <body>
+    <div id="cont">
   <main>
     <div class="meta">
       <div id="name">&nbsp;</div>
-      <div id="refresh"><a href="https://beetles.bleeptrack.de">NEW</a></div>
-      <div id="seed">&nbsp;</div>
+      <div id="menue">
+      <button id="shirtbutton" onclick="chooseDesign()"><img class="icon" src="icons8-jumper-50.png" alt="print on shirt" title="print on shirt"></button>
+      <button id="cyclebutton" onclick="toggleLoop()"><img class="icon" src="icons8-next-80.png" alt="animate beelte" title="animate beelte"></button>
+      <button id="refresh" onclick="makeNewBeetle()"><img class="icon" src="icons8-neu-64.png" alt="new beetle" title="new beetle"></button>
+      <button id="seed" onclick="saveBeetle()"><img class="icon" src="icons8-save-50.png" alt="permalink" title="permalink"></button>
+      <div id="permalink" style="display:none;"></div>
+      </div>
     </div>
     <div id="beetle"></div>
   </main>
@@ -46,12 +52,9 @@
         <div class="cont">
         <button class="parambutton">Pattern</button><fieldset id="pattern" style="display:none"></fieldset>
         </div>
-        
-        <div class="cont"><button id="shirtbutton" onclick="chooseDesign()">print on shirt (soon :) )</button></div>
-        
-        <div class="cont"><button id="cyclebutton" onclick="toggleLoop()">Cycle Bug</button></div>
    
     
+  </div>
   </div>
   <footer>
     a project by <a href="https://bleeptrack.de">bleeptrack</a>

@@ -48,6 +48,7 @@ function setup() {
     if ('tshirt' in params){
         
         if(parseInt(params['tshirt'])==0){
+            document.body.style.backgroundColor = "transparent";
             document.body.innerHTML = '<div id="shirt-container" class="container0" ><div>';
             
             
@@ -77,7 +78,7 @@ function setup() {
             cropped.id = 'sticker';
       
         }else if(parseInt(params['tshirt'])==1){
-      
+            document.body.style.backgroundColor = "transparent";
             var cropped = trimCanvas(b.canvas.canvas);
             b.canvas.remove();
         
@@ -94,7 +95,7 @@ function setup() {
             
         }else if(parseInt(params['tshirt'])==2){
             
-            
+            document.body.style.backgroundColor = "transparent";
             var colorFaktor = new Array(5);
             colorFaktor = [ -100, -75, -50, -25, 0, 25, 50, 75, 100];
             
@@ -228,13 +229,18 @@ function setup() {
         var buttons = document.getElementsByClassName('parambutton');
 
         for(var i = 0; i < buttons.length; i++) {
-            this.elem = buttons[i];
+            
             buttons[i].addEventListener('click', function(e){
-                
                 var set = e.target.nextSibling;
+                var state = (set.style.display === 'none' ? 'block' : 'none');
+                console.log(state);
+                
+                hideAll();
                 
                 
-                set.style.display = (set.style.display === 'none' ? 'block' : 'none');
+                
+                
+                set.style.display = state;
             });
         }
 
@@ -246,17 +252,30 @@ function setup() {
     
 }
 
+function hideAll(){
+    var buttons = document.getElementsByClassName('parambutton');
+
+        for(var i = 0; i < buttons.length; i++) {
+            
+            var set = buttons[i].nextSibling;
+                
+                
+                set.style.display = 'none';
+            
+        }
+}
+
 function toggleLoop(){
     console.log('toggle');
     var button = document.getElementById('cyclebutton');
     if(!cycle){
         loop();
-        button.innerHTML = 'Stop Cycle';
+        button.innerHTML = '<img class="icon" src="icons8-delete-80.png">';
     }else{
         document.getElementById('beetle').style.backgroundImage = 'url(' + b.bg.canvas.toDataURL() + ')';
         b.bg.remove();
         noLoop();
-        button.innerHTML = 'Cycle Bug';
+        button.innerHTML = '<img class="icon" src="icons8-next-80.png">';
     }
     cycle = !cycle;
 }
@@ -265,11 +284,41 @@ function loadShop(){
     var script = document.createElement('script');
     script.src = "shopscript.js";
     document.body.innerHTML = '';
+    
     document.body.appendChild(script);
 }
 
+function makeNewBeetle(){
+  b = new Beetle(-1, -1, Array(), Array());
+  initseed = b.bugseed;
+  initpattern = b.bugpattern;
+  var cropped = trimCanvas(b.canvas.canvas);
+  b.canvas.remove();
+  var node = document.getElementById('beetle');
+  node.removeChild(node.firstChild);
+  node.appendChild(cropped);
+  cropped.id = 'beetlecanvas';
+  cropped.style.display = 'block';
+  
+  b.bg.remove();
+  
+  
+  updateSliders();
+  updatePermalink();
+  updateBackground();
+  history.pushState({}, null, 'https://beetles.bleeptrack.de/');
+}
+
+function saveBeetle(){
+    history.pushState({}, null, 'https://beetles.bleeptrack.de?seed='+initseed.toString()+'&pattern='+initpattern.toString());
+
+    window.addEventListener('popstate', function(event) {
+        window.location.assign('https://beetles.bleeptrack.de?seed='+initseed.toString()+'&pattern='+initpattern.toString());
+    });
+}
+
 function chooseDesign(){
-    document.body.innerHTML = '<main><button onclick="createShirt(1)">Design 1</button><button onclick="createShirt(2)">Design 2</button></main>';
+    document.body.innerHTML = '<main><button onclick="createShirt(1)"><div class="dtext"><h1>Design 1</h1><p>your Beetle and a wing pattern background<p></div><img class="design" src="design1.png"></button><button onclick="createShirt(2)"><div class="dtext"><h1>Design 2</h1><p>a grid of 5x5 Beetles with yours at the center</p></div><img class="design" src="design2.png"></button></main>';
     
     
     history.pushState({}, null, 'https://beetles.bleeptrack.de?seed='+initseed.toString()+'&pattern='+initpattern.toString());
@@ -284,6 +333,17 @@ function chooseDesign(){
 
 function createShirt(designnr){
     console.log('fetching design '+designnr);
+    document.body.innerHTML = '<main><div id="wait"><h1>Please hang on. Generating might take up to 30sec.</h1><div id="spinner"></div></div></main>';
+    
+    var cropped = trimCanvas(b.canvas.canvas);
+  
+  var node = document.getElementById('spinner');
+  
+  node.appendChild(cropped);
+  cropped.id = 'beetlecanvas';
+  cropped.style.display = 'block';
+    
+    
     getJSON('https://beetles.bleeptrack.de/shirtimg/?tshirt='+designnr+'&seed='+initseed.toString()+'&pattern='+initpattern.toString(),function(err, data) {
         if (err !== null) {
             alert('Something went wrong: ' + err);
@@ -346,12 +406,12 @@ function updateBug(renewPattern){
 
 
 
-function updatePermalink(){
-  var div = document.getElementById('seed');
-  div.innerHTML = '<a href="https://beetles.bleeptrack.de?seed='+initseed.toString()+'&pattern='+initpattern.toString()+'">permalink</a>';
-  
+function updatePermalink(){  
   var div = document.getElementById('name');
 	div.innerHTML = b.name;
+    
+  var perm = document.getElementById('permalink');
+	perm.innerHTML = 'http://beetles.bleeptrack.de/?seed='+b.bugseed+'&pattern='+b.bugpattern;
 }
 
 
@@ -462,8 +522,8 @@ function changePatternStyle(newVal){
 
 function updateSliders(){
     var colors = document.getElementById('colors');
-    colors.innerHTML = '<label for="color1">Main Color: </label><input type="color" id="color1" name="color1" value="'+b.color1+'" onchange="changeColor(this.value, this.id)"/><br>';
-    colors.innerHTML += '<label for="color2">Pattern Color: </label><input type="color" id="color2" name="color2" value="'+b.color2+'" onchange="changeColor(this.value, this.id)"/><br>';
+    colors.innerHTML = '<label for="color1">Main Color: </label><input type="color" id="color1" name="color1" value="'+b.color1+'" onchange="changeColor(this.value, this.id)"/></br>';
+    colors.innerHTML += '<label for="color2">Pattern Color: </label><input type="color" id="color2" name="color2" value="'+b.color2+'" onchange="changeColor(this.value, this.id)"/></br>';
     var feelers = document.getElementById('feelers');
     feelers.innerHTML = '';
     var body = document.getElementById('body');

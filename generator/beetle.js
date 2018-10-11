@@ -99,10 +99,6 @@ class Beetle{
 
 
     	this.mainC = colo[1];
-        console.log("colo: "+this.mainC);
-        //this.fontColor = color(wingr,s2,( 100-b2<60 && 100-b2>40 ) ? 20 : 100-b2);
-        this.fontColor = color(wingr,100-s2,100-b2);
-        
 
     	this.headC = colo[2];
 

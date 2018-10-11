@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 const BEETLESURL = 'https://beetles.bleeptrack.de/';
-const BEETLEIMG = '/beetleimg';
+const BEETLEIMG = '/path/to/save';
 
 var express = require('express');
 var app = express();

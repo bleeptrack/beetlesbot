@@ -10,22 +10,134 @@ html {
 }
 
 body {
-  max-width: 750px;
+  max-width: 90%;
   margin: 0 auto;
   padding: 40px 0 0 0;
+  background-color: whiteSmoke;
+  display: flex;
+  justify-content: space-around;
+}
+
+button{
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+select {      
+      background-color: white;
+      color: black;
+      border: none;
+      padding: 3px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+      margin-bottom: 10px;
+}
+
+.cont > button{
+    width: 100%;
+}
+
+fieldset > button{
+    width: 100%;
+}
+
+#menue > button{
+    padding: 8px;
+}
+
+#name{
+    width: 50%
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
+input[type=range] {
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
 }
 
 main {
-  margin: 0 0 1em;
-  background: #fff;
-  text-align: center;
-  box-shadow: 2px 4px 6px 1px rgba(50, 50, 50, 0.14);
+    flex-basis: 800px;
+    
+}
+
+#smartomat{
+    max-width: 900px;
+    
+}
+
+#sshop{
+    
+}
+
+#beetle {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  min-height: 500px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+#beetlecanvas {
+  max-width: 70%;
+  min-height: 100px;
+  max-height: 400px;
 }
 
 .meta {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   padding: 2em 2em 1.7em;
+  align-items: center;
+  background-color: white;
+  margin-top: 40px;
+}
+
+main > button{
+    width: 100%;
+}
+
+.design{
+
+    max-width: 300px;
+}
+
+.icon{
+    width: 40px;
+}
+
+button:hover{
+    background-color: lightSteelBlue;
 }
 
 #name {
@@ -50,20 +162,7 @@ main {
   font-weight: 200;
 }
 
-#beetle {
-  min-height: 500px;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-position: center bottom;
-}
 
-#beetlecanvas {
-  max-width: 90%;
-  max-height: 400px;
-}
 
 #defaultCanvas0 {
   display: none;
@@ -75,6 +174,9 @@ footer {
   margin: 0 0 1em;
   color: #666;
   text-shadow: 0 0 2px #fff;
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
 footer a {
@@ -83,25 +185,23 @@ footer a {
 
 fieldset{
     background-color: white;
-    width: 100%;
     display:none;
     margin-bottom:15px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 }
     
 #wrap{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-basis: 400px;
+    margin: 1em;
 }
 
 .cont{
-    width: 26%;
+    width: 100%;
+    
 }
     
-button{
-    width: 100%;
-    margin-bottom: 10px;
-}
+
 
 #shirt-container{
     
@@ -118,7 +218,7 @@ button{
     width:1500px;
     height: 1500px;
     position: relative;
-    left: -400px;
+    left: 0px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -128,7 +228,7 @@ button{
     width:500px;
     height: 500px;
     position: relative;
-    left: -400px;
+    left: 0px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -174,4 +274,38 @@ button{
 
 .shirt-body{
     max-width: 100% !important;
+}
+
+#cont{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+#spinner{
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    width: 200px;
+    
+}
+
+.wait{
+    margin: 0 auto;
+    width: 300px;
+}
+
+.window{
+    max-width: 700px; !important
 }

@@ -94,7 +94,7 @@ if (ENABLE_TWEET) {
 
   console.debug(`getting name and seed`);
   let name = await getText('#name');
-  let seed = await getLink('#seed a');
+  let seed = await getText('#permalink');
   //seed = seed.replace(/^#/, '');
 
   console.debug(`getting image`);
