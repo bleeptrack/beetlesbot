@@ -269,13 +269,15 @@ function toggleLoop(){
     console.log('toggle');
     var button = document.getElementById('cyclebutton');
     if(!cycle){
+        document.getElementById('beetle').classList.add("paused");
         loop();
-        button.innerHTML = '<img class="icon" src="icons8-delete-80.png">';
+        button.innerHTML = '<img class="icon" alt="stop animate" src="icons8-delete-80.png">';
     }else{
         document.getElementById('beetle').style.backgroundImage = 'url(' + b.bg.canvas.toDataURL() + ')';
         b.bg.remove();
         noLoop();
-        button.innerHTML = '<img class="icon" src="icons8-next-80.png">';
+        document.getElementById('beetle').classList.remove("paused");
+        button.innerHTML = '<img class="icon" alt="animate beetle" src="icons8-next-80.png">';
     }
     cycle = !cycle;
 }
