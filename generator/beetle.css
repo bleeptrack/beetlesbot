@@ -110,9 +110,9 @@ main {
   background-repeat: no-repeat;
 }
 
-#beetle:not(.paused) {
-  animation: breath 15s linear alternate infinite;
-}
+/*#beetle:not(.paused) {
+  animation: breath 15s ease alternate infinite;
+}*/
 
 @keyframes breath {
   0% { background-size: 100% 100%; }
