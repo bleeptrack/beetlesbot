@@ -948,6 +948,7 @@ var ntc = {
 ["AB917A", "Sandrift"],
 ["ABA0D9", "Cold Purple"],
 ["ABA196", "Bronco"],
+["AC0F02", "Ruby Red"],
 ["AC8A56", "Limed Oak"],
 ["AC91CE", "East Side"],
 ["AC9E22", "Lemon Ginger"],
