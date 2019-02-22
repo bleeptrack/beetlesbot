@@ -13,12 +13,18 @@ function trimCanvas(c) {
       right: null,
       bottom: null
     },
-    x, y;
+    x,
+    y,
+    p = 0,
+    abs = Math.abs,
+    w = c.width,
+    d = pixels.data;
 
   for (i = 0; i < l; i += 4) {
-    if (pixels.data[i + 3] !== 0) {
-      x = (i / 4) % c.width;
-      y = ~~((i / 4) / c.width);
+    if (d[i + 3] !== 0) {
+      //p = (i / 4);
+      x = p % w;
+      y = abs(p / w);
 
       if (bound.top === null) {
         bound.top = y;
@@ -42,6 +48,7 @@ function trimCanvas(c) {
         bound.bottom = y;
       }
     }
+    p += 1;
   }
 
   var trimHeight = bound.bottom - bound.top,
