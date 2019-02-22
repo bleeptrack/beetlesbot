@@ -16,7 +16,7 @@ function trimCanvas(c) {
     x, y;
 
   for (i = 0; i < l; i += 4) {
-    if (pixels.data[i+3] !== 0) {
+    if (pixels.data[i + 3] !== 0) {
       x = (i / 4) % c.width;
       y = ~~((i / 4) / c.width);
 
@@ -45,8 +45,8 @@ function trimCanvas(c) {
   }
 
   var trimHeight = bound.bottom - bound.top,
-      trimWidth = bound.right - bound.left,
-      trimmed = ctx.getImageData(bound.left, bound.top, trimWidth, trimHeight);
+    trimWidth = bound.right - bound.left,
+    trimmed = ctx.getImageData(bound.left, bound.top, trimWidth, trimHeight);
 
   copy.canvas.width = trimWidth;
   copy.canvas.height = trimHeight;
