@@ -646,6 +646,14 @@ class Beetle {
 			this.attributes.push("Striped");
 		}
 
+		//replace tint and image function.
+		{
+			this.bgPattern.push();
+			this.bgPattern.fill(255, 120);
+			this.bgPattern.rect(0, 0, this.bgPattern.width, this.bgPattern.height);
+			this.bgPattern.pop();
+		}
+		this.bg = this.bgPattern;
 	}
 
 	drawWing() {
@@ -654,11 +662,6 @@ class Beetle {
 		if (isTint < 10) {
 			this.canvas.tint(255, 255 * isTint * 0.1);
 		}
-
-		this.bg = createGraphics(1100, 500);
-		this.bg.tint(255, 120);
-		this.bg.image(this.bgPattern.get(), 0, 0, this.bgPattern.width / 2, this.bgPattern.height / 2);
-		this.bgPattern.remove();
 
 		var wingMaskL = createGraphics(500, 1000);
 		wingMaskL.scale(2);
