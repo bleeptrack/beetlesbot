@@ -10,6 +10,7 @@ var pC = 0;
 
 var cycle = false;
 
+p5.disableFriendlyErrors = true; // disables FES
 
 function setup() {
 
@@ -273,8 +274,7 @@ function toggleLoop() {
         loop();
         button.innerHTML = '<img class="icon" alt="stop animate" src="icons8-delete-80.png">';
     } else {
-        document.getElementById('beetle').style.backgroundImage = 'url(' + b.bg.canvas.toDataURL() + ')';
-        b.bg.remove();
+        updateBackground();
         noLoop();
         document.getElementById('beetle').classList.remove("paused");
         button.innerHTML = '<img class="icon" alt="animate beetle" src="icons8-next-80.png">';
@@ -387,16 +387,16 @@ function updateBug(renewPattern) {
     }
 
 
-
     initseed = b.bugseed;
     initpattern = b.bugpattern;
     var cropped = trimCanvas(b.canvas.canvas);
+    cropped.id = 'beetlecanvas';
+    cropped.style.display = 'block';
     b.canvas.remove();
     var node = document.getElementById('beetle');
     node.removeChild(node.firstChild);
     node.appendChild(cropped);
-    cropped.id = 'beetlecanvas';
-    cropped.style.display = 'block';
+    
 
     b.bg.remove();
 
@@ -479,8 +479,7 @@ function changeColor(hex, id) {
     updatePermalink();
 
     //update background because of changed color
-    document.getElementById('beetle').style.backgroundImage = 'url(' + b.bg.canvas.toDataURL() + ')';
-    b.bg.remove();
+    updateBackground();
 }
 
 function changeParam(newVal, name) {
@@ -524,61 +523,60 @@ function changePatternStyle(newVal) {
 
 function updateSliders() {
     var colors = document.getElementById('colors');
-    colors.innerHTML = '<label for="color1">Main Color: </label><input type="color" id="color1" name="color1" value="' + b.color1 + '" onchange="changeColor(this.value, this.id)"/></br>';
-    colors.innerHTML += '<label for="color2">Pattern Color: </label><input type="color" id="color2" name="color2" value="' + b.color2 + '" onchange="changeColor(this.value, this.id)"/></br>';
     var feelers = document.getElementById('feelers');
-    feelers.innerHTML = '';
     var body = document.getElementById('body');
-    body.innerHTML = '';
     var feet = document.getElementById('feet');
-    feet.innerHTML = '';
     var wing = document.getElementById('wing');
-    wing.innerHTML = '';
 
+    var colorsHtml = '';
+    colorsHtml += '<label for="color1">Main Color: </label><input type="color" id="color1" name="color1" value="' + b.color1 + '" onchange="changeColor(this.value, this.id)"/></br>';
+    colorsHtml += '<label for="color2">Pattern Color: </label><input type="color" id="color2" name="color2" value="' + b.color2 + '" onchange="changeColor(this.value, this.id)"/></br>';
+    var feelersHtml = '';
+    var bodyHtml = '';
+    var feetHtml = '';
+    var wingHtml = '';
+
+    for (var i = 0; i < b.names.length; i++) {
+        if (typeof b.names[i] !== 'undefined' && b.names[i] != "") {
+            var html = '<label for="' + b.names[i] + '">' + b.names[i] + '</label><br><input type="range" id="' + b.names[i] + '" name="' + b.names[i] + '" min="' + b.mins[i] + '" max="' + b.maxs[i] + '" value="' + b.bugseed[i] + '" onchange="changeParam(this.value, this.id)"/><br>';
+            if (b.category[i] === "colors") {
+                colorsHtml += html;
+            } else if (b.category[i] === "feelers") {
+                feelersHtml += html;
+            } else if (b.category[i] === "body") {
+                bodyHtml += html;
+            } else if (b.category[i] === "feet") {
+                feetHtml += html;
+            } else if (b.category[i] === "wing") {
+                wingHtml += html;
+            } else {
+                //Undefined variable paramset
+                //paramset.innerHTML += html;
+            }
+        }
+    }
+
+    colors.innerHTML = colorsHtml;
+    feelers.innerHTML = feelersHtml;
+    body.innerHTML = bodyHtml;
+    feet.innerHTML = feetHtml;
+    wing.innerHTML = wingHtml;
 
     var paramsetP = document.getElementById('pattern');
-    paramsetP.innerHTML = '<select onchange="changePatternStyle(this.value)">'
+    var paramsetPHTML = '<select onchange="changePatternStyle(this.value)">'
         + '<option value="0"' + (b.patternvalue == 0 ? 'selected' : '') + '>Rings</option>'
         + '<option value="1"' + (b.patternvalue == 1 ? 'selected' : '') + '>Dots</option>'
         + '<option value="2"' + (b.patternvalue == 2 ? 'selected' : '') + '>Pattern</option>'
         + '</select><button onclick="changePatternStyle()">shuffle</button><br>';
 
-    createSliders();
-
-}
-
-function createSliders() {
-
-    var colors = document.getElementById('colors');
-    var feelers = document.getElementById('feelers');
-    var body = document.getElementById('body');
-    var feet = document.getElementById('feet');
-    var wing = document.getElementById('wing');
-    for (var i = 0; i < b.names.length; i++) {
-        if (typeof b.names[i] !== 'undefined' && b.names[i] != "") {
-            var html = '<label for="' + b.names[i] + '">' + b.names[i] + '</label><br><input type="range" id="' + b.names[i] + '" name="' + b.names[i] + '" min="' + b.mins[i] + '" max="' + b.maxs[i] + '" value="' + b.bugseed[i] + '" onchange="changeParam(this.value, this.id)"/><br>';
-            if (b.category[i] === "colors") {
-                colors.innerHTML += html;
-            } else if (b.category[i] === "feelers") {
-                feelers.innerHTML += html;
-            } else if (b.category[i] === "body") {
-                body.innerHTML += html;
-            } else if (b.category[i] === "feet") {
-                feet.innerHTML += html;
-            } else if (b.category[i] === "wing") {
-                wing.innerHTML += html;
-            } else {
-                paramset.innerHTML += html;
-            }
-        }
-    }
-
     var paramsetP = document.getElementById('pattern');
     for (var i = 0; i < b.namesP.length; i++) {
         if (typeof b.namesP[i] !== 'undefined' && b.namesP[i] != "") {
-            paramsetP.innerHTML += '<label for="' + b.namesP[i] + '">' + b.namesP[i] + '</label><br><input type="range" id="' + b.namesP[i] + '" name="' + b.namesP[i] + '" min="' + b.minsP[i] + '" max="' + b.maxsP[i] + '" value="' + b.bugpattern[i] + '" onchange="changeParamP(this.value, this.id)"/><br>';
+            paramsetPHTML += '<label for="' + b.namesP[i] + '">' + b.namesP[i] + '</label><br><input type="range" id="' + b.namesP[i] + '" name="' + b.namesP[i] + '" min="' + b.minsP[i] + '" max="' + b.maxsP[i] + '" value="' + b.bugpattern[i] + '" onchange="changeParamP(this.value, this.id)"/><br>';
         }
     }
+
+    paramsetP.innerHTML = paramsetPHTML;
 }
 
 function draw() {
