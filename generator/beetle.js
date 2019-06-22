@@ -18,7 +18,8 @@ class Beetle{
         this.bugpattern = bP;
         this.bugseed = bS;
      
-      this.canvas = createGraphics(1500,1500);
+      this.canvas = createGraphics(1000,1000);
+      
       
      this.canvas.scale(2);
 
@@ -27,10 +28,9 @@ class Beetle{
     	this.draw();
     	this.generateName();
         
+        
+        
     }
-    
-
-
 
     getImage(){
     	return this.canvas;

@@ -10,6 +10,8 @@ var pC = 0;
 
 var cycle = false;
 
+var kiosk = false;
+
 
 function setup() {
     
@@ -34,6 +36,24 @@ function setup() {
         }else{
             pC = -1;
         }
+        
+        if ('kiosk' in params){
+            kiosk = true;
+            document.getElementById('shirtbutton').style.display = 'none';
+            document.getElementById('seed').style.display = 'none';
+            var buttons = document.getElementsByClassName('parambutton');
+            var set = buttons[0].nextSibling;
+            set.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            console.log(window.screen.availWidth);
+            if (window.screen.availWidth > 2000){
+                document.body.style.zoom = 1.5;
+            }else{
+                document.body.style.zoom = 1.2;
+            }
+            document.querySelector('footer').style = 'display: none'
+        
+        }
 
         
         noLoop();
@@ -47,7 +67,30 @@ function setup() {
 
     if ('tshirt' in params){
         
+        //for sticker generator and beetlehash ;)
         if(parseInt(params['tshirt'])==0){
+            
+            //check that the bug is not too dark
+            
+            console.log("L: "+initseed[5]);
+            if(initseed[5]<40){
+                initseed[5]=40;
+                console.log("L: "+initseed[5]);
+            }
+            while(abs(initseed[5]-initseed[6])<15){
+                initseed[6] = Math.round(Math.random() * (100 - 30) ) + 30;
+                
+            }
+            if(initseed[6]<30){
+                initseed[6]=30;
+                console.log("L: "+initseed[6]);
+            }
+            b = new Beetle(0,0, initseed, initpattern);
+            
+            
+            
+            
+            
             document.body.style.backgroundColor = "transparent";
             document.body.innerHTML = '<div id="shirt-container" class="container0" ><div>';
             
@@ -68,14 +111,62 @@ function setup() {
             cropped.style.height = Math.round(cropped.height*scale*0.01)+'px';
             
            
-            b.bg.remove();
+            
+           
         
             var d = document.createElement('div');
+            d.id = "stickerbox1";
+           
+            //d.style.backgroundImage = 'url(' + b.bg.canvas.toDataURL() + ')';
+            //d.style.backgroundColor = 'white';
+            //d.style.backgroundSize = 'cover';
+            
+            var lumbg = initseed[5] + (100-initseed[5])*0.6;
+            console.log("BG: "+lumbg);
+            d.style.backgroundColor = 'hsl(' +initseed[0]+ ',' +initseed[3]+ '%,' +lumbg+ '%)';
+            
+            b.bg.remove();
             d.classList.add('singlebeetle0');
             d.appendChild(cropped);
             document.getElementById('shirt-container').appendChild(d);
             cropped.classList.add('rasterimg');
-            cropped.id = 'sticker';
+            cropped.id = 'sticker2';
+            
+            var dup = cropped.cloneNode(true);
+            var destCtx = dup.getContext('2d');
+
+
+            destCtx.drawImage(cropped, 0, 0);
+            //document.getElementById('shirt-container').appendChild(dup);
+            var d2 = document.createElement('div');
+            d2.id = "stickerbox0";
+            d2.classList.add('singlebeetle0');
+            d2.appendChild(dup);
+            document.getElementById('shirt-container').appendChild(d2);
+            dup.classList.add('rasterimg');
+            dup.id = 'sticker';
+            
+            
+            var dup2 = cropped.cloneNode(true);
+            var destCtx2 = dup2.getContext('2d');
+            destCtx2.drawImage(cropped, 0, 0);
+            //document.getElementById('shirt-container').appendChild(dup);
+            var d3 = document.createElement('div');
+            d3.id = "stickerbox2";
+            d3.classList.add('singlebeetle0');
+            d3.style.backgroundImage = 'url(' + b.bg.canvas.toDataURL() + ')';
+            d3.style.backgroundColor = 'white';
+            d3.style.backgroundSize = 'cover';
+            d3.appendChild(dup2);
+            document.getElementById('shirt-container').appendChild(d3);
+            dup2.classList.add('rasterimg');
+            dup2.id = 'sticker3';
+            
+            var savestring = '&seed='+initseed.toString()+'&pattern='+initpattern.toString();
+            var p = document.createElement('p');
+            p.innerText = savestring;
+            p.id = 'savestring';
+            document.getElementById('shirt-container').appendChild(p);
       
         }else if(parseInt(params['tshirt'])==1){
             document.body.style.backgroundColor = "transparent";
@@ -346,7 +437,7 @@ function createShirt(designnr){
   cropped.style.display = 'block';
     
     
-    getJSON('https://beetles.bleeptrack.de/shirtimg/?tshirt='+designnr+'&seed='+initseed.toString()+'&pattern='+initpattern.toString(),function(err, data) {
+    getJSON('https://beetles.bleeptrack.de/beetleimg/?tshirt='+designnr+'&seed='+initseed.toString()+'&pattern='+initpattern.toString(),function(err, data) {
         if (err !== null) {
             alert('Something went wrong: ' + err);
         } else {
@@ -354,8 +445,9 @@ function createShirt(designnr){
             
             shirturl = data['url'];
             console.log(data['url']);
+            window.location.replace(shirturl);
             
-            loadShop();
+            //loadShop();
         }
     });
     
