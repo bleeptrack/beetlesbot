@@ -766,6 +766,7 @@ var ntc = {
 ["868974", "Bitter"],
 ["86949F", "Regent Gray"],
 ["871550", "Disco"],
+["ED1D24", "Company Red"],
 ["87756E", "Americano"],
 ["877C7B", "Hurricane"],
 ["878D91", "Oslo Gray"],
