@@ -86,8 +86,10 @@ app.get('/', function (req, res) {
     
 });
 
-app.listen(62846, function () {
-  console.log('Example app listening on port 62846!');
+var PORT = process.env.PORT || 62846;
+
+app.listen(PORT, function () {
+  console.log(`Example app listening on port ${PORT}!`);
 }); 
 
 
