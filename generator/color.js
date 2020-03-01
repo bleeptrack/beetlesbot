@@ -595,6 +595,7 @@ var ntc = {
 ["660099", "Purple"],
 ["66023C", "Tyrian Purple"],
 ["661010", "Dark Tan"],
+["663399", "Rebecca Purple"],
 ["66B58F", "Silver Tree"],
 ["66FF00", "Bright Green"],
 ["66FF66", "Screamin' Green"],
